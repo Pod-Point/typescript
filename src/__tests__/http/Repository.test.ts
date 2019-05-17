@@ -23,6 +23,7 @@ describe('repositories/Repository', () => {
             total: 1,
         };
 
+        // @ts-ignore
         client.get = mockRequest({
             meta,
             [endpoint]: [
@@ -45,6 +46,7 @@ describe('repositories/Repository', () => {
         const fakeModel: ExampleModel = factory.model(fakeData);
         const params: ExampleModelAttributes = fakePayload;
 
+        // @ts-ignore
         client.post = mockRequest({
             [endpoint]: fakePayload,
         });
@@ -61,6 +63,7 @@ describe('repositories/Repository', () => {
         const fakeModel: ExampleModel = factory.model(fakeData);
         const params: object = {};
 
+        // @ts-ignore
         client.get = mockRequest({
             [endpoint]: fakePayload,
         });
@@ -77,6 +80,7 @@ describe('repositories/Repository', () => {
         const fakeModel: ExampleModel = factory.model(fakeData);
         const params: ExampleModelAttributes = fakePayload;
 
+        // @ts-ignore
         client.patch = mockRequest({
             [endpoint]: fakePayload,
         });
@@ -91,6 +95,7 @@ describe('repositories/Repository', () => {
         const fakeModel: ExampleModel = factory.model();
         const params: object = {};
 
+        // @ts-ignore
         client.delete = mockRequest();
 
         await repository.delete(fakeModel.id, params);
