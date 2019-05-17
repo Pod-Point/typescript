@@ -1,0 +1,55 @@
+{
+  "name": "@pod-point/typescript",
+  "version": "1.0.0",
+  "description": "A TypeScript library.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "node_modules/.bin/tsc",
+    "lint": "node_modules/.bin/tslint 'src/**/*.{ts,tsx}'",
+    "test": "node_modules/.bin/jest --watch",
+    "test:coverage": "node_modules/.bin/jest --coverage --runInBand --ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pod-Point/typescript.git"
+  },
+  "keywords": [
+    "TypeScript"
+  ],
+  "author": "Pod Point Software Team <software@pod-point.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pod-Point/typescript/issues"
+  },
+  "homepage": "https://github.com/Pod-Point/typescript#readme",
+  "devDependencies": {
+    "@types/faker": "^4.1.5",
+    "@types/jest": "^24.0.13",
+    "@types/lodash": "^4.14.129",
+    "faker": "^4.1.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!node_modules/**",
+      "!src/index.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testRegex": "(/__tests__/.*\\.(test|spec))\\.(js?|ts?)$",
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    }
+  }
+}
