@@ -1,27 +1,33 @@
 {
   "name": "@pod-point/typescript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A TypeScript library.",
   "main": "lib/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Pod Point Software Team <software@pod-point.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pod-Point/typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pod-Point/typescript/issues"
+  },
+  "homepage": "https://github.com/Pod-Point/typescript#readme",
+  "keywords": [
+    "TypeScript"
+  ],
   "scripts": {
     "build": "node_modules/.bin/tsc",
     "lint": "node_modules/.bin/tslint 'src/**/*.{ts,tsx}'",
     "test": "node_modules/.bin/jest --watch",
     "test:coverage": "node_modules/.bin/jest --coverage --runInBand --ci"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pod-Point/typescript.git"
+  "dependencies": {
+    "aws-sdk": "^2.457.0",
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11"
   },
-  "keywords": [
-    "TypeScript"
-  ],
-  "author": "Pod Point Software Team <software@pod-point.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Pod-Point/typescript/issues"
-  },
-  "homepage": "https://github.com/Pod-Point/typescript#readme",
   "devDependencies": {
     "@types/faker": "^4.1.5",
     "@types/jest": "^24.0.13",
@@ -33,11 +39,6 @@
     "tslint": "^5.16.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.4.5"
-  },
-  "dependencies": {
-    "aws-sdk": "^2.457.0",
-    "axios": "^0.18.0",
-    "lodash": "^4.17.11"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -53,5 +54,8 @@
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
