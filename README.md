@@ -99,7 +99,7 @@ npm run test
 
 ### Releases
 
-This package is distributed via npm and published automatically by Travis when creating a tagged commit. This can be done in one of 2 ways:
+This package is distributed via NPM and published automatically by Travis when creating a tagged commit. This can be done in one of 2 ways:
 
 #### 1. Pre-merge via the CLI
 
@@ -115,4 +115,4 @@ If you forget to do this before merging, this is not a problem, just create a ne
 
 **After** merging your code changes, create a new branch/PR from master and update the package version in `package.json` to whatever you wish the next release to be.
 
-**Before** merging this PR, create a release via GitHub with a tag version to match this package version number, this will trigger the tagged commit and in turn the automatic deplyment to NPM.
+**Before** merging this PR, create a release via GitHub with a tag version to match this package version number, this will trigger the tagged commit and in turn the automatic deployment to NPM.
