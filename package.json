@@ -51,5 +51,8 @@
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
