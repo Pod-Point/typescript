@@ -1,5 +1,8 @@
 # Typescript
 
+[![Build Status](https://travis-ci.com/Pod-Point/typescript.svg?branch=master)](https://travis-ci.com/Pod-Point/typescript)
+[![codecov](https://codecov.io/gh/Pod-Point/typescript/branch/master/graph/badge.svg)](https://codecov.io/gh/Pod-Point/typescript)
+
 A library of re-usable TypeScript components.
 
 ## Installation
