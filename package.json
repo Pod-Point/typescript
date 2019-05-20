@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "A TypeScript library.",
   "main": "lib/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "node_modules/.bin/tsc",
     "lint": "node_modules/.bin/tslint 'src/**/*.{ts,tsx}'",
