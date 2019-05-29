@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "A TypeScript library.",
   "main": "lib/index.js",
-  "types": "dist/index.d.ts",
+  "types": "lib/index.d.ts",
   "author": "Pod Point Software Team <software@pod-point.com>",
   "license": "MIT",
   "repository": {
