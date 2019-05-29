@@ -1,6 +1,6 @@
 {
   "name": "@pod-point/typescript",
-  "version": "1.0.3",
+  "version": "1.0.4-0",
   "description": "A TypeScript library.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
