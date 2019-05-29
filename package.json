@@ -1,6 +1,6 @@
 {
   "name": "@pod-point/typescript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A TypeScript library.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,6 +24,7 @@
     "test:coverage": "node_modules/.bin/jest --coverage --runInBand --ci"
   },
   "dependencies": {
+    "aws-sdk": "^2.457.0",
     "axios": "^0.18.0",
     "lodash": "^4.17.11"
   },
@@ -31,6 +32,7 @@
     "@types/faker": "^4.1.5",
     "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.129",
+    "@types/node": "^12.0.2",
     "faker": "^4.1.0",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
