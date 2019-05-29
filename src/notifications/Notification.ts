@@ -22,13 +22,12 @@ export default class Notification implements NotificationInterface<SNS.Types.Pub
             TopicArn: this.topicARN,
         };
 
-        return new SNS(this.config || {})
+        const response: SNS.Types.PublishResponse = await new SNS(this.config || {})
             .publish(message)
-            .promise()
-            .then((response: SNS.Types.PublishResponse) => {
-                this.id = response.MessageId;
+            .promise();
 
-                return response;
-            });
+        this.id = response.MessageId;
+
+        return Promise.resolve(response);
     }
 }
