@@ -21,7 +21,7 @@ export default class Service implements LogService {
             .putRecord({
                 Data: message,
                 PartitionKey: this.partitionKey,
-                StreamName: this.partitionKey,
+                StreamName: this.streamName,
             })
             .promise()
             .then((response: Kinesis.Types.PutRecordOutput) => {
