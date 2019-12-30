@@ -13,4 +13,3 @@ export class KinesisRequest {
 export interface KinesisResponse {
     SequenceNumber: string;
 }
-
