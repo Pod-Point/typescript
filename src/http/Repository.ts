@@ -70,6 +70,7 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
     public async find(id: number | string, params: object = {}): Promise<Model> {
         const client: Client = this.getClient();
         const endpoint: string = this.getEndpoint();
+        console.log(' -- DEBUG -- typescript library before response');
         const response: Response = await client.get(`${endpoint}/${id}`, params);
         console.log('-- DEBUG -- typescript library response', response);
         const payload: ModelPayload = this.getPayload(response);
