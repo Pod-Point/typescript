@@ -74,8 +74,11 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
         const response: Response = await client.get(`${endpoint}/${id}`, params);
         console.log('-- DEBUG -- typescript library response', response);
         const payload: ModelPayload = this.getPayload(response);
+        console.log('-- DEBUG -- typescript library payload', payload);
+        const hydratedModel = this.hydrateModel(payload);
+        console.log('-- DEBUG -- typescript library hydratedModel', hydratedModel);
 
-        return this.hydrateModel(payload);
+        return this.hydratedModel;
     }
 
     /**
