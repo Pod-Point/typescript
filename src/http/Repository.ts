@@ -78,7 +78,7 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
         const hydratedModel = this.hydrateModel(payload);
         console.log('-- DEBUG -- typescript library hydratedModel', hydratedModel);
 
-        return this.hydratedModel;
+        return hydratedModel;
     }
 
     /**
