@@ -1,4 +1,3 @@
-export { default as CacheService } from './cache/Service';
 export { default as Factory } from './factories/Factory';
 export { default as PayloadFactory } from './factories/PayloadFactory';
 export { default as Repository } from './http/Repository';
@@ -8,7 +7,6 @@ export { default as LogService } from './logs/Service';
 export { default as Model } from './models/Model';
 export { default as PayloadTransformer } from './transformers/PayloadTransformer';
 
-export { default as CacheServiceInterface } from './types/cache/Service';
 export { default as FactoryInterface } from './types/factories/Factory';
 export { default as ClientInterface } from './types/http/Client';
 export { default as ResponseInterface } from './types/http/Response';
