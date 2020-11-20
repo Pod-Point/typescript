@@ -1,6 +1,7 @@
 import axios, { AxiosStatic } from 'axios';
 import * as faker from 'faker';
 import Client from '../../http/Client';
+import RequestParams from '../../types/http/RequestParams';
 
 jest.mock('axios');
 const mockAxios: AxiosStatic = axios as AxiosStatic;
@@ -104,6 +105,33 @@ describe('Client', () => {
 
         expect(mockAxios.post).toBeCalledWith(fakePath, payload, {
             params: query,
+        });
+    });
+
+    describe('PUT request', () => {
+        it('should be able to make a put request with provided array payload', () => {
+            const data: any[] = [
+                { uid: 'xxx'},
+            ];
+
+            const params: RequestParams = {
+                data,
+            };
+
+            client.put(fakePath, params);
+
+            expect(mockAxios.put).toBeCalledWith(fakePath, data, {});
+        });
+
+        it('should be able to make a put request with provided object payload', () => {
+            const params: RequestParams = {
+                headers: 'some extra header',
+                uid: 'xxx',
+            };
+
+            client.put(fakePath, params);
+
+            expect(mockAxios.put).toBeCalledWith(fakePath, { uid: 'xxx' }, { headers: 'some extra header' });
         });
     });
 });

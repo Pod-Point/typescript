@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import * as _ from 'lodash';
 import { default as ClientInterface } from '../types/http/Client';
+import RequestParams from '../types/http/RequestParams';
 import Response from '../types/http/Response';
 
 export default class Client implements ClientInterface {
@@ -25,10 +25,10 @@ export default class Client implements ClientInterface {
     /**
      * Makes a GET request to the API.
      */
-    public get(path: string, params: object = {}): Promise<Response> {
+    public get(path: string, params: RequestParams = {}): Promise<Response> {
         const config: AxiosRequestConfig = {};
-        const headers: object = _.get(params, 'headers');
-        const query: object = _.omit(params, ['headers']);
+
+        const { headers, ...query }: RequestParams = params;
 
         if (headers) {
             config.headers = headers;
@@ -44,19 +44,8 @@ export default class Client implements ClientInterface {
     /**
      * Makes a POST request to the API.
      */
-    public post(path: string, params: object = {}): Promise<Response> {
-        const config: AxiosRequestConfig = {};
-        const headers: object = _.get(params, 'headers');
-        const query: object = _.get(params, 'query');
-        const data: object = _.omit(params, ['headers', 'query']);
-
-        if (headers) {
-            config.headers = headers;
-        }
-
-        if (query) {
-            config.params = query;
-        }
+    public post(path: string, params: RequestParams = {}): Promise<Response> {
+        const { data, ...config }: AxiosRequestConfig = this.parseParamsToConfig(params);
 
         return this.client.post(path, data, config);
     }
@@ -64,30 +53,28 @@ export default class Client implements ClientInterface {
     /**
      * Makes a PATCH request to the API.
      */
-    public patch(path: string, params: object = {}): Promise<Response> {
-        const config: AxiosRequestConfig = {};
-        const headers: object = _.get(params, 'headers');
-        const query: object = _.get(params, 'query');
-        const data: object = _.omit(params, ['headers', 'query']);
-
-        if (headers) {
-            config.headers = headers;
-        }
-
-        if (query) {
-            config.params = query;
-        }
+    public patch(path: string, params: RequestParams = {}): Promise<Response> {
+        const { data, ...config }: AxiosRequestConfig = this.parseParamsToConfig(params);
 
         return this.client.patch(path, data, config);
     }
 
     /**
+     * Makes a PUT request to the API.
+     */
+    public put(path: string, params: RequestParams = {}): Promise<Response> {
+        const { data, ...config }: AxiosRequestConfig = this.parseParamsToConfig(params);
+
+        return this.client.put(path, data, config);
+    }
+
+    /**
      * Makes a DELETE request to the API.
      */
-    public delete(path: string, params: object = {}): Promise<Response> {
+    public delete(path: string, params: RequestParams = {}): Promise<Response> {
         const config: AxiosRequestConfig = {};
-        const headers: object = _.get(params, 'headers');
-        const query: object = _.omit(params, ['headers']);
+
+        const { headers, ...query }: RequestParams = params;
 
         if (headers) {
             config.headers = headers;
@@ -98,5 +85,27 @@ export default class Client implements ClientInterface {
         }
 
         return this.client.delete(path, config);
+    }
+
+    /**
+     * Parse request params into axios request config.
+     */
+    private parseParamsToConfig(params: RequestParams): AxiosRequestConfig {
+        const config: AxiosRequestConfig = {};
+        const { headers, query, data, ...rest }: RequestParams = params;
+
+        if (headers) {
+            config.headers = headers;
+        }
+
+        if (query) {
+            config.params = query;
+        }
+
+        if (data || Object.keys(rest).length) {
+            config.data = data ?? rest;
+        }
+
+        return config;
     }
 }
