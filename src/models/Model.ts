@@ -13,7 +13,7 @@ export default abstract class Model<Attributes> {
     }
 
     /**
-     * Return serialized attributes.
+     * Returns serializable attributes.
      */
     public toSerializable(): Attributes {
         return JSON.parse(JSON.stringify(this));
