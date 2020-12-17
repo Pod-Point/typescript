@@ -15,7 +15,7 @@ export default abstract class Model<Attributes> {
     /**
      * Return serialized attributes.
      */
-    public serialized(): Attributes {
+    public toSerializable(): Attributes {
         return JSON.parse(JSON.stringify(this));
     }
 
