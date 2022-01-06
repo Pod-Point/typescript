@@ -15,7 +15,6 @@ export default class Client implements ClientInterface {
             baseURL: domain + prefix,
             headers: {
                 'Accept': 'application/json',
-                'Accept-Encoding': 'None',
                 'Content-Type': 'application/json',
                 'User-Agent': userAgent,
             },

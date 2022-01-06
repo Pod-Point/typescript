@@ -22,7 +22,6 @@ describe('Client', () => {
             baseURL: fakeDomain + fakePrefix,
             headers: {
                 'Accept': 'application/json',
-                'Accept-Encoding': 'None',
                 'Content-Type': 'application/json',
                 'User-Agent': fakeUserAgent,
             },
