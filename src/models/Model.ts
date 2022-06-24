@@ -13,6 +13,13 @@ export default abstract class Model<Attributes> {
     }
 
     /**
+     * Returns serializable attributes.
+     */
+    public toSerializable(): Attributes {
+        return JSON.parse(JSON.stringify(this));
+    }
+
+    /**
      * Fills the models relations.
      */
     protected hydrateRelations(attributes: Attributes): void {
