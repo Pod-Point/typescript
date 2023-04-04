@@ -40,6 +40,41 @@ describe('repositories/Repository', () => {
         });
     });
 
+    it('get can handle empty results and will retry', async () => {
+        const fakePayload: ExampleModelAttributes = factory.payload();
+        const fakeData: ExampleModelAttributes = factory.transform(fakePayload);
+        const fakeModel: ExampleModel = factory.model(fakeData);
+        const params: object = {};
+        const meta: object = {
+            total: 1,
+        };
+
+        // @ts-ignore
+        client.get = jest.fn()
+            .mockImplementationOnce(() => Promise.resolve({
+                data: {
+                    meta,
+                    [endpoint]: null,
+                },
+            }))
+            .mockImplementationOnce(() => Promise.resolve({
+                data: {
+                    meta,
+                    [endpoint]: [
+                        fakePayload,
+                    ],
+                },
+            }));
+
+        const result: Collection<ExampleModel> = await repository.get(params);
+
+        expect(client.get).toHaveBeenCalledTimes(2);
+        expect(result).toContainEqual(fakeModel);
+        expect(result.getMeta()).toEqual({
+            meta,
+        });
+    });
+
     it('calls the api to create a new instance of the model', async () => {
         const fakePayload: ExampleModelAttributes = factory.payload();
         const fakeData: ExampleModelAttributes = factory.transform(fakePayload);

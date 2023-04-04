@@ -53,8 +53,14 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
     public async get(params: object = {}): Promise<Collection<Model>> {
         const client: Client = this.getClient();
         const endpoint: string = this.getEndpoint();
-        const response: Response = await client.get(endpoint, params);
-        const payload: ModelPayload[] = this.getPayload(response);
+        let response: Response = await client.get(endpoint, params);
+        let payload: ModelPayload[] = this.getPayload(response);
+
+        while (! Array.isArray(payload)) {
+            response = await client.get(endpoint, params);
+            payload = this.getPayload(response);
+        }
+
         const meta: object = this.getPayloadMeta(response);
         const items: Model[] = payload.map((attributes: ModelPayload) => this.hydrateModel(attributes));
 
