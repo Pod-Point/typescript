@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import Collection from '../models/Collection';
+import NetworkError from '../models/NetworkError';
 import PayloadTransformer from '../transformers/PayloadTransformer';
 import Client from '../types/http/Client';
 import Response from '../types/http/Response';
@@ -65,7 +66,7 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
         }
 
         if (! Array.isArray(payload)) {
-            throw new Error('Network Error');
+            throw new NetworkError();
         }
 
         const meta: object = this.getPayloadMeta(response);
