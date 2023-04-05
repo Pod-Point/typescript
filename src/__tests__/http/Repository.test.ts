@@ -75,6 +75,44 @@ describe('repositories/Repository', () => {
         });
     });
 
+    it('Will retry to get 3 times before throwing an Network error exception', async () => {
+        const params: object = {};
+        const meta: object = {
+            total: 0,
+        };
+
+        // @ts-ignore
+        client.get = jest.fn()
+            .mockImplementationOnce(() => Promise.resolve({
+                data: {
+                    meta,
+                    [endpoint]: null,
+                },
+            }))
+            .mockImplementationOnce(() => Promise.resolve({
+                data: {
+                    meta,
+                    [endpoint]: null,
+                },
+            }))
+            .mockImplementationOnce(() => Promise.resolve({
+                data: {
+                    meta,
+                    [endpoint]: null,
+                },
+            }));
+
+        expect.assertions(2);
+
+        try {
+            await repository.get(params);
+        } catch (error) {
+            expect(client.get).toHaveBeenCalledTimes(3);
+
+            expect(error.message).toEqual('Network Error');
+        }
+    });
+
     it('calls the api to create a new instance of the model', async () => {
         const fakePayload: ExampleModelAttributes = factory.payload();
         const fakeData: ExampleModelAttributes = factory.transform(fakePayload);
