@@ -1,5 +1,6 @@
 import Client from '../../http/Client';
 import Collection from '../../models/Collection';
+import NetworkError from '../../models/NetworkError';
 import ExampleModelFactory from '../factories/ExampleModelFactory';
 import ExampleModel from '../models/ExampleModel';
 import { mockRequest, testClient } from '../setup';
@@ -109,7 +110,7 @@ describe('repositories/Repository', () => {
         } catch (error) {
             expect(client.get).toHaveBeenCalledTimes(3);
 
-            expect(error.message).toEqual('Network Error');
+            expect(error).toBeInstanceOf(NetworkError);
         }
     });
 
