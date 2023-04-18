@@ -41,42 +41,7 @@ describe('repositories/Repository', () => {
         });
     });
 
-    it('get can handle empty results and will retry', async () => {
-        const fakePayload: ExampleModelAttributes = factory.payload();
-        const fakeData: ExampleModelAttributes = factory.transform(fakePayload);
-        const fakeModel: ExampleModel = factory.model(fakeData);
-        const params: object = {};
-        const meta: object = {
-            total: 1,
-        };
-
-        // @ts-ignore
-        client.get = jest.fn()
-            .mockImplementationOnce(() => Promise.resolve({
-                data: {
-                    meta,
-                    [endpoint]: null,
-                },
-            }))
-            .mockImplementationOnce(() => Promise.resolve({
-                data: {
-                    meta,
-                    [endpoint]: [
-                        fakePayload,
-                    ],
-                },
-            }));
-
-        const result: Collection<ExampleModel> = await repository.get(params);
-
-        expect(client.get).toHaveBeenCalledTimes(2);
-        expect(result).toContainEqual(fakeModel);
-        expect(result.getMeta()).toEqual({
-            meta,
-        });
-    });
-
-    it('Will retry to get 3 times before throwing an Network error exception', async () => {
+    it('Will throw an Network error exception if payload is not a ', async () => {
         const params: object = {};
         const meta: object = {
             total: 0,
@@ -89,18 +54,6 @@ describe('repositories/Repository', () => {
                     meta,
                     [endpoint]: null,
                 },
-            }))
-            .mockImplementationOnce(() => Promise.resolve({
-                data: {
-                    meta,
-                    [endpoint]: null,
-                },
-            }))
-            .mockImplementationOnce(() => Promise.resolve({
-                data: {
-                    meta,
-                    [endpoint]: null,
-                },
             }));
 
         expect.assertions(2);
@@ -108,7 +61,7 @@ describe('repositories/Repository', () => {
         try {
             await repository.get(params);
         } catch (error) {
-            expect(client.get).toHaveBeenCalledTimes(3);
+            expect(client.get).toHaveBeenCalledTimes(1);
 
             expect(error).toBeInstanceOf(NetworkError);
         }

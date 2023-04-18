@@ -13,7 +13,6 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
     protected namespace?: string;
     protected metaKeys: string[] = ['meta', 'links'];
     protected readonly transformer: Transformer = new PayloadTransformer();
-    protected readonly maxGetAttempts: number = 3;
 
     /**
      * Returns the endpoint.
@@ -55,15 +54,8 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
     public async get(params: object = {}): Promise<Collection<Model>> {
         const client: Client = this.getClient();
         const endpoint: string = this.getEndpoint();
-        let response: Response;
-        let payload: ModelPayload[] = null;
-        let attempts: number = 0;
-
-        while (! Array.isArray(payload) && attempts < this.maxGetAttempts) {
-            response = await client.get(endpoint, params);
-            payload = this.getPayload(response);
-            attempts++;
-        }
+        const response: Response = await client.get(endpoint, params);
+        const payload: ModelPayload[] = this.getPayload(response);
 
         if (! Array.isArray(payload)) {
             throw new NetworkError();
@@ -71,6 +63,7 @@ export default abstract class Repository<Model, ModelPayload, CreateResponse = M
 
         const meta: object = this.getPayloadMeta(response);
         const items: Model[] = payload.map((attributes: ModelPayload) => this.hydrateModel(attributes));
+
         const collection: Collection<Model> = new Collection(...items);
         collection.setMeta(meta);
 
