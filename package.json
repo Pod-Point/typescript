@@ -24,7 +24,8 @@
     "test:coverage": "node_modules/.bin/jest --coverage --runInBand --ci"
   },
   "dependencies": {
-    "aws-sdk": "^2.457.0",
+    "@aws-sdk/client-kinesis": "^3.354.0",
+    "@aws-sdk/client-sns": "^3.354.0",
     "axios": "^0.18.0",
     "lodash": "^4.17.11"
   },
