@@ -6,9 +6,14 @@ export default class Notification implements NotificationInterface<SNS.Types.Pub
     public topicARN: string;
     public config: SNS.ClientConfiguration = {};
     public id?: string;
-    public messageAttributes = {};
+    public messageAttributes: SNS.MessageAttributeMap = {};
 
-    public constructor(message: string, topicARN: string, config?: SNS.ClientConfiguration, messageAttributes?: SNS.MessageAttributeMap) {
+    public constructor(
+        message: string,
+        topicARN: string,
+        config?: SNS.ClientConfiguration,
+        messageAttributes?: SNS.MessageAttributeMap,
+    ) {
         this.message = message;
         this.topicARN = topicARN;
         this.config = config;
