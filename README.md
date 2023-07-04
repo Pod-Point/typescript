@@ -50,7 +50,7 @@ const exampleRepository = new ExampleRepository(client);
 
 ### Models & Factories
 
-Create a and use model factories to generate:
+Create model factories to generate:
 - fake model instances
 - fake objects representing a models attributes
 - fake objects representing a models payload
