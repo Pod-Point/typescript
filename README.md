@@ -50,7 +50,7 @@ const exampleRepository = new ExampleRepository(client);
 
 ### Models & Factories
 
-Create a and use model factories to generate: 
+Create a and use model factories to generate:
 - fake model instances
 - fake objects representing a models attributes
 - fake objects representing a models payload
@@ -99,7 +99,7 @@ npm run test
 
 ### Releases
 
-This package is distributed via NPM and published automatically by Travis when creating a tagged commit. This can be done in one of 2 ways:
+This package is distributed via NPM and published automatically by Travis when creating a tagged commit. This can be done in one of 2 ways, see below. After you did this, please don't forget to draft your new release on the [GitHub Releases page](https://github.com/Pod-Point/typescript/releases)!
 
 #### 1. Pre-merge via the CLI
 
