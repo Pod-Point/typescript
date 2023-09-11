@@ -1,0 +1,12 @@
+/coverage
+/node_modules
+/lib
+.husky
+.idea
+.eslintrc.js
+.prettierrc.json
+.travis.yml
+tsconfig.json
+package.json
+package-lock.json
+README.md

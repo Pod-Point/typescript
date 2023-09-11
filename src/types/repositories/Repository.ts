@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import Collection from '../../models/Collection';
 
 export default interface Repository<Model> {

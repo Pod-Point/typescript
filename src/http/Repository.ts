@@ -7,7 +7,11 @@ import RepositoryInterface from '../types/repositories/Repository';
 import Transformer from '../types/transformers/Transformer';
 import Service from './Service';
 
-export default abstract class Repository<Model, ModelPayload, CreateResponse = Model, UpdateResponse = Model> extends Service implements RepositoryInterface<Model> { // tslint:disable-line max-line-length
+export default abstract class Repository<Model, ModelPayload, CreateResponse = Model, UpdateResponse = Model>
+    extends Service
+    implements RepositoryInterface<Model>
+{
+    // tslint:disable-line max-line-length
     protected endpoint: string;
     protected namespace?: string;
     protected metaKeys: string[] = ['meta', 'links'];

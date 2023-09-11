@@ -1,12 +1,16 @@
 import Service from '../../logs/Service';
 import Log from '../../types/logs/Log';
+import { AwsStub, mockClient } from 'aws-sdk-client-mock';
+import { KinesisClient, PutRecordCommand } from '@aws-sdk/client-kinesis';
+import { ServiceInputTypes, ServiceOutputTypes } from '@aws-sdk/client-sns';
 
-jest.mock('aws-sdk');
+const kinesisMock: AwsStub<ServiceInputTypes, ServiceOutputTypes, unknown> = mockClient(KinesisClient);
 
 describe('logs/Service', () => {
     describe('create', () => {
-        it('creates a log in AWS Kinesis', async () => { // tslint:disable-line max-line-length
-            const service: Service = new Service('someStreamName', 'somePartitionKey');
+        kinesisMock.on(PutRecordCommand).resolves({ SequenceNumber: 'someSequenceNumber' });
+        it('creates a log in AWS Kinesis', async () => {
+            const service: Service = new Service('someStreamName', 'somePartitionKey', { region: 'eu-west-1' });
 
             const log: Log = await service.create('someMessage');
 

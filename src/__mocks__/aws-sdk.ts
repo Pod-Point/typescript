@@ -5,9 +5,11 @@ export class SNS {
 }
 
 export class SNSRequest {
-    public promise: () => Promise<SNSResponse> = jest.fn(() => Promise.resolve({
-        MessageId: 'someMessageId',
-    }));
+    public promise: () => Promise<SNSResponse> = jest.fn(() =>
+        Promise.resolve({
+            MessageId: 'someMessageId',
+        }),
+    );
 }
 
 export interface SNSResponse {
@@ -19,9 +21,11 @@ export class Kinesis {
 }
 
 export class KinesisRequest {
-    public promise: () => Promise<KinesisResponse> = jest.fn(() => Promise.resolve({
-        SequenceNumber: 'someSequenceNumber',
-    }));
+    public promise: () => Promise<KinesisResponse> = jest.fn(() =>
+        Promise.resolve({
+            SequenceNumber: 'someSequenceNumber',
+        }),
+    );
 }
 
 export interface KinesisResponse {

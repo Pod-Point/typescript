@@ -1,7 +1,7 @@
 import '../lib/polyfill';
 
 export default class Collection<Item, Meta = object | null> extends Array<Item> {
-    private meta: Meta = null;
+    private meta: Meta | null = null;
 
     public constructor(...items: Item[]) {
         super(...items);
@@ -10,11 +10,11 @@ export default class Collection<Item, Meta = object | null> extends Array<Item> 
         Object.setPrototypeOf(this, Collection.prototype);
     }
 
-    public setMeta(meta: Meta = null): void {
+    public setMeta(meta: Meta | null = null): void {
         this.meta = meta;
     }
 
-    public getMeta(): Meta {
+    public getMeta(): Meta | null {
         return this.meta;
     }
 }
