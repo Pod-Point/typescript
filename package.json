@@ -63,7 +63,7 @@
       "ts",
       "js"
     ],
-    "testRegex": "(/__tests__/.*\\.(test|spec))\\.(js?|ts?)$",
+    "testRegex": "(src/__tests__/.*\\.(test|spec))\\.(js?|ts?)$",
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     }
