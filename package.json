@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --quiet",
-    "prettier": "prettier .",
+    "prettier": "prettier . --check",
     "typecheck": "tsc --noEmit",
     "test": "jest --runInBand",
     "test:coverage": "jest --coverage --runInBand --ci",
