@@ -21,7 +21,7 @@ jobs:
             - run: npm run lint
             - run: npm run prettier
     build:
-        name: Check coding standards
+        name: Build
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
