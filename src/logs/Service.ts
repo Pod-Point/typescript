@@ -31,6 +31,7 @@ export default class Service implements LogService {
         const command: PutRecordCommand = new PutRecordCommand(input);
         const client: KinesisClient = new KinesisClient(this.config);
         const response: PutRecordCommandOutput = await client.send(command);
+
         return {
             id: response.SequenceNumber,
             message,
