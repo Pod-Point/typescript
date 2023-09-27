@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import merge from 'lodash/merge';
 import FactoryInterface from '../types/factories/Factory';
 
 export default abstract class Factory<Model, Attributes> implements FactoryInterface<Model, Attributes> {
@@ -20,7 +20,7 @@ export default abstract class Factory<Model, Attributes> implements FactoryInter
         const defaultAttributes: Attributes = this.attributes();
         const stateAttributes: object = this.getCurrentStateAttributes();
 
-        return _.merge({}, defaultAttributes, stateAttributes, attributes);
+        return merge({}, defaultAttributes, stateAttributes, attributes);
     }
 
     /**
@@ -45,7 +45,7 @@ export default abstract class Factory<Model, Attributes> implements FactoryInter
      */
     protected formatDateTime(date: Date): string {
         function addLeadingZeros(value: number): string {
-            return (`0${value}`).slice(-2);
+            return `0${value}`.slice(-2);
         }
 
         const year: number = date.getUTCFullYear();
@@ -67,7 +67,7 @@ export default abstract class Factory<Model, Attributes> implements FactoryInter
 
         if (this.currentStates.length) {
             this.currentStates.map((state: string) => {
-                _.merge(attributes, stateAttributes[state]);
+                merge(attributes, stateAttributes[state]);
             });
 
             this.currentStates = [];

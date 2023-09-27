@@ -22,6 +22,7 @@ export default abstract class Model<Attributes> {
     /**
      * Fills the models relations.
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected hydrateRelations(attributes: Attributes): void {
         //
     }

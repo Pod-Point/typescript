@@ -1,18 +1,25 @@
-import { SNS } from 'aws-sdk';
+import {
+    SNSClient,
+    PublishCommand,
+    PublishInput,
+    SNSClientConfig,
+    MessageAttributeValue,
+    PublishResponse,
+} from '@aws-sdk/client-sns';
 import NotificationInterface from '../types/notifications/Notification';
 
-export default class Notification implements NotificationInterface<SNS.Types.PublishResponse> {
+export default class Notification implements NotificationInterface<PublishResponse> {
     public message: string;
     public topicARN: string;
-    public config: SNS.ClientConfiguration = {};
+    public config: SNSClientConfig = {};
     public id?: string;
-    public messageAttributes: SNS.MessageAttributeMap = {};
+    public messageAttributes?: Record<string, MessageAttributeValue> = {};
 
     public constructor(
         message: string,
         topicARN: string,
-        config?: SNS.ClientConfiguration,
-        messageAttributes?: SNS.MessageAttributeMap,
+        config: SNSClientConfig,
+        messageAttributes?: Record<string, MessageAttributeValue>,
     ) {
         this.message = message;
         this.topicARN = topicARN;
@@ -23,20 +30,18 @@ export default class Notification implements NotificationInterface<SNS.Types.Pub
     /**
      * Publishes the notification to AWS SNS.
      */
-    public async dispatch(): Promise<SNS.Types.PublishResponse> {
-        const message: SNS.Types.PublishInput = {
+    public async dispatch(): Promise<PublishResponse> {
+        const input: PublishInput = {
+            TopicArn: this.topicARN,
             Message: this.message,
             MessageAttributes: this.messageAttributes,
-            TopicArn: this.topicARN,
         };
+        const client: SNSClient = new SNSClient(this.config);
+        const command: PublishCommand = new PublishCommand(input);
+        const response: PublishResponse = await client.send(command);
 
-        return new SNS(this.config || {})
-            .publish(message)
-            .promise()
-            .then((response: SNS.Types.PublishResponse) => {
-                this.id = response.MessageId;
+        this.id = response.MessageId;
 
-                return response;
-            });
+        return response;
     }
 }

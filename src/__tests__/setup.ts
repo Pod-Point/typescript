@@ -10,8 +10,8 @@ export function testClient(): Client {
 /**
  * Returns a jest function which will return a promise of the response data.
  */
-export function mockRequest(responseData: object = {}) { // tslint:disable-line typedef
-    return jest.fn(() => Promise.resolve({
+export function mockRequest(responseData: object = {}) {
+    return jest.fn().mockResolvedValue({
         data: responseData,
-    }));
+    });
 }

@@ -16,22 +16,19 @@ export default class PayloadTransformer implements Transformer {
             });
         }
 
-        return Object.keys(object).reduce(
-            (accumulator: object, key: string) => {
-                let value: any = object[key];
+        return Object.keys(object).reduce((accumulator: object, key: string) => {
+            let value: any = object[key];
 
-                if (this.isObject(value)) {
-                    value = this.transform(value);
-                }
+            if (this.isObject(value)) {
+                value = this.transform(value);
+            }
 
-                const newKey: string = this.transformKey(key);
+            const newKey: string = this.transformKey(key);
 
-                accumulator[newKey] = value;
+            accumulator[newKey] = value;
 
-                return accumulator;
-            },
-            {},
-        );
+            return accumulator;
+        }, {});
     }
 
     /**

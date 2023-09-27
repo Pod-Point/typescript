@@ -1,13 +1,13 @@
 # Typescript
 
-[![Build Status](https://travis-ci.com/Pod-Point/typescript.svg?branch=master)](https://travis-ci.com/Pod-Point/typescript)
-[![codecov](https://codecov.io/gh/Pod-Point/typescript/branch/master/graph/badge.svg)](https://codecov.io/gh/Pod-Point/typescript)
+[![build](https://github.com/Pod-Point/typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/Pod-Point/typescript/actions/workflows/ci.yml)
 
 A library of re-usable TypeScript components.
 
 ## Installation
 
 To install this, simply run:
+
 ```bash
 npm install @pod-point/typescript
 ```
@@ -51,9 +51,10 @@ const exampleRepository = new ExampleRepository(client);
 ### Models & Factories
 
 Create model factories to generate:
-- fake model instances
-- fake objects representing a models attributes
-- fake objects representing a models payload
+
+-   fake model instances
+-   fake objects representing a models attributes
+-   fake objects representing a models payload
 
 ```js
 // path/to/ExampleModelFactory
@@ -78,6 +79,7 @@ Overrides can be passed into all of these methods, and there is also a method av
 This is styled on the [Laravel factories](https://laravel.com/docs/5.6/database-testing#factory-states).
 
 Example:
+
 ```js
 import { ExampleModelFactory } from 'path/to/ExampleModelFactory';
 
@@ -104,6 +106,7 @@ This package is distributed via NPM and published automatically by Travis when c
 #### 1. Pre-merge via the CLI
 
 **Before** merging your PR following code review & QA, run the following commands to update the package version and create a new release/tag.
+
 ```
 npm version <major|minor|patch|prerelease>
 git push && push --tags

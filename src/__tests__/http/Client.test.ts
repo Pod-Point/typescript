@@ -21,7 +21,7 @@ describe('Client', () => {
         expect(axios.create).toBeCalledWith({
             baseURL: fakeDomain + fakePrefix,
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'User-Agent': fakeUserAgent,
             },
@@ -109,9 +109,7 @@ describe('Client', () => {
 
     describe('PUT request', () => {
         it('should be able to make a put request with provided array payload', () => {
-            const data: any[] = [
-                { uid: 'xxx'},
-            ];
+            const data: any[] = [{ uid: 'xxx' }];
 
             const params: RequestParams = {
                 data,

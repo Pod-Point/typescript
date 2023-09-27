@@ -6,15 +6,11 @@ import Response from '../types/http/Response';
 export default class Client implements ClientInterface {
     protected readonly client: AxiosInstance;
 
-    public constructor(
-        userAgent: string,
-        domain: string,
-        prefix: string = '/api/',
-    ) {
+    public constructor(userAgent: string, domain: string, prefix: string = '/api/') {
         this.client = axios.create({
             baseURL: domain + prefix,
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'User-Agent': userAgent,
             },

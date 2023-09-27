@@ -3,7 +3,11 @@ import PayloadTransformer from '../transformers/PayloadTransformer';
 import Transformer from '../types/transformers/Transformer';
 import Factory from './Factory';
 
-export default abstract class PayloadFactory<Model, Attributes, Payload = Attributes> extends Factory<Model, Attributes> { // tslint:disable-line max-line-length
+export default abstract class PayloadFactory<Model, Attributes, Payload = Attributes> extends Factory<
+    Model,
+    Attributes
+> {
+    // tslint:disable-line max-line-length
     protected readonly transformer: Transformer;
 
     /**
@@ -55,13 +59,10 @@ export default abstract class PayloadFactory<Model, Attributes, Payload = Attrib
     protected stateAttributes(): object {
         const statePayloads: object = this.statePayloads();
 
-        return Object.keys(statePayloads).reduce(
-            (accumulator: object, state: string) => {
-                accumulator[state] = this.transformer.transform(statePayloads[state]);
+        return Object.keys(statePayloads).reduce((accumulator: object, state: string) => {
+            accumulator[state] = this.transformer.transform(statePayloads[state]);
 
-                return accumulator;
-            },
-            {},
-        );
+            return accumulator;
+        }, {});
     }
 }

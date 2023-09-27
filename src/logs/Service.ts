@@ -1,13 +1,19 @@
-import { Kinesis } from 'aws-sdk';
+import {
+    KinesisClient,
+    KinesisClientConfig,
+    PutRecordCommand,
+    PutRecordCommandOutput,
+    PutRecordInput,
+} from '@aws-sdk/client-kinesis';
 import Log from '../types/logs/Log';
 import LogService from '../types/logs/Service';
 
 export default class Service implements LogService {
     public streamName: string;
     public partitionKey: string;
-    public config: Kinesis.ClientConfiguration = {};
+    public config: KinesisClientConfig = {};
 
-    public constructor(streamName: string, partitionKey: string, config?: Kinesis.ClientConfiguration) {
+    public constructor(streamName: string, partitionKey: string, config: KinesisClientConfig) {
         this.streamName = streamName;
         this.partitionKey = partitionKey;
         this.config = config;
@@ -17,18 +23,18 @@ export default class Service implements LogService {
      * Creates a log in AWS Kinesis.
      */
     public async create(message: string): Promise<Log> {
-        return new Kinesis(this.config || {})
-            .putRecord({
-                Data: message,
-                PartitionKey: this.partitionKey,
-                StreamName: this.streamName,
-            })
-            .promise()
-            .then((response: Kinesis.Types.PutRecordOutput) => {
-                return {
-                    id: response.SequenceNumber,
-                    message,
-                };
-            });
+        const input: PutRecordInput = {
+            Data: new TextEncoder().encode(message),
+            PartitionKey: this.partitionKey,
+            StreamName: this.streamName,
+        };
+        const command: PutRecordCommand = new PutRecordCommand(input);
+        const client: KinesisClient = new KinesisClient(this.config);
+        const response: PutRecordCommandOutput = await client.send(command);
+
+        return {
+            id: response.SequenceNumber,
+            message,
+        };
     }
 }

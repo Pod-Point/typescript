@@ -1,7 +1,7 @@
 import * as faker from 'faker';
 import PayloadFactory from '../../factories/PayloadFactory';
 import ExampleModel from '../models/ExampleModel';
-import ExampleModelAttributes from '../types/ExampleModelAttributes';
+import type ExampleModelAttributes from '../types/ExampleModelAttributes';
 
 export default class ExampleModelFactory extends PayloadFactory<ExampleModel, ExampleModelAttributes> {
     /**
@@ -16,7 +16,7 @@ export default class ExampleModelFactory extends PayloadFactory<ExampleModel, Ex
      */
     public payload(): ExampleModelAttributes {
         return {
-            id: faker.random.number(),
+            id: faker.datatype.number(),
         };
     }
 }

@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "› running tests"
+npm test
+
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
+
+echo "› formatting code..."
+echo "$FILES" | xargs ./node_modules/.bin/prettier -u --write
+echo "› fixing code --fix..."
+echo "$FILES" | xargs ./node_modules/.bin/eslint --fix --quiet
+
+echo "$FILES" | xargs git add
+
+exit 0
