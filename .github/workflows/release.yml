@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
     publish:
+        name: Publish on npm
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
